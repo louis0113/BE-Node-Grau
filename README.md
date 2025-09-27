@@ -17,3 +17,7 @@ Aqui se encontra atividades sobre programação Back-End em **Javascript** usand
 
 Mostrar o conhecimento adquirido ao longo da matéria de *Back-end* para avaliação do curso de **Análise e Desenvolvimento de Sistemas**
 da turma **DSI10** da instituição Grau Técnco!
+
+## Atividades Pedidas
+
+- Objetos Iteraveis
