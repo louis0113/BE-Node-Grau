@@ -1,60 +1,93 @@
 # Atividades Back-End - Grau Técnico
-Esse simples repositório no Github vai ser um grande compilado das atividades passadas pela Profº Luana.
-Aqui se encontra atividades sobre programação Back-End em Javascript usando o ambiente NodeJs.
----
-## Tecnologias
-- Git & Github
-- Javascript
-- NodeJS
-- pnpm
----
-## Instalação
-### Pré-requisitos
-    - Node.js (versão 20 ou superior)
-- pnpm (gerenciador de pacotes)
+
+> Repositório de atividades práticas da disciplina de Back-End em JavaScript/Node.js
+
+Este repositório contém as atividades desenvolvidas durante o curso de Análise e Desenvolvimento de Sistemas (turma DSI10) da instituição Grau Técnico, sob orientação da Profª Luana.
+
+## 📋 Sobre o Projeto
+
+O objetivo deste repositório é demonstrar o conhecimento adquirido em programação Back-End utilizando JavaScript e Node.js, servindo como material de avaliação da disciplina.
+
+## 🚀 Tecnologias Utilizadas
+
+- **Node.js** - Ambiente de execução JavaScript
+- **JavaScript** - Linguagem de programação
+- **pnpm** - Gerenciador de pacotes
+- **Git & GitHub** - Controle de versão
+
+## 📦 Pré-requisitos
+
+Antes de começar, você precisa ter instalado:
+
+- [Node.js](https://nodejs.org/) (versão 20 ou superior)
+- [pnpm](https://pnpm.io/) (gerenciador de pacotes)
+
 ### Instalando o pnpm
-    Se você ainda não tem o pnpm instalado, execute:
-    bash
-    npm install -g pnpm
 
-### Configurando o projeto
-    1. Clone o repositório:
-    bash
-    git clone <url-do-repositorio>
-    cd <nome-do-repositorio>
+Caso não tenha o pnpm instalado:
 
-    2. Instale as dependências:
-    bash
-    pnpm install
+```bash
+npm install -g pnpm
+```
 
-    3. Execute o projeto:                                                                 bash
-    pnpm start
+## ⚙️ Instalação e Configuração
 
-    ---
-## Objetivo
-    Mostrar o conhecimento adquirido ao longo da matéria de Back-end para avaliação do curso de Análise e Desenvolvimento de Sistemas
-    da turma DSI10 da instituição Grau Técnco!
-## Atividades Pedidas
-    - Objetos Iteraveis
-    ---
-## Comandos úteis
-    bash
-### Instalar dependências
-    pnpm install
-### Executar o projeto
-    pnpm start
-### Adicionar uma nova dependência
-    pnpm add <nome-do-pacote>
-### Adicionar uma dependência de desenvolvimento
-    pnpm add -D <nome-do-pacote>
+1. **Clone o repositório**
 
-    Há a opção de usar os comandos listados no Makefile do projeto como as citadas abaixo:
-    ---
-### Cria um novo index.js(se isso não foi criado)
-    `make`
-### Faz o setup das dependências para os pacotes Node
-    `make setup`
-### Apaga o diretório "node_modules"
-    `make clean`
-### Realiza os casos de teste
-    `make test`
+```bash
+git clone <url-do-repositorio>
+cd <nome-do-repositorio>
+```
+
+2. **Instale as dependências**
+
+```bash
+pnpm install
+```
+
+3. **Execute o projeto**
+
+```bash
+pnpm start
+```
+
+## 🛠️ Comandos Disponíveis
+
+### Comandos pnpm
+
+| Comando | Descrição |
+|---------|-----------|
+| `pnpm install` | Instala todas as dependências do projeto |
+| `pnpm start` | Executa o projeto |
+| `pnpm add <pacote>` | Adiciona uma nova dependência |
+| `pnpm add -D <pacote>` | Adiciona uma dependência de desenvolvimento |
+
+### Comandos Make
+
+O projeto possui um `Makefile` com comandos auxiliares:
+
+| Comando | Descrição |
+|---------|-----------|
+| `make` | Cria um novo arquivo index.js (se não existir) |
+| `make setup` | Configura as dependências do projeto |
+| `make clean` | Remove o diretório node_modules |
+| `make test` | Executa os casos de teste |
+
+## 📚 Atividades Implementadas
+
+- Objetos Iteráveis
+
+## 👩‍🏫 Créditos
+
+- **Professora:** Luana
+- **Instituição:** Grau Técnico
+- **Curso:** Análise e Desenvolvimento de Sistemas
+- **Turma:** DSI10
+
+## 📄 Licença
+
+Este projeto é de uso acadêmico e foi desenvolvido para fins educacionais.
+
+---
+
+**Desenvolvido com 💙 para avaliação acadêmica**
