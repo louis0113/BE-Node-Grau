@@ -1,0 +1,32 @@
+{
+  "name": "atividades-backend-grau-tecnico-objetos-iteraveis",
+  "version": "1.0.0",
+  "description": "Compilado das atividades de programação Back-End em Javascript usando NodeJS para o curso de Análise e Desenvolvimento de Sistemas - DSI10",
+  "main": "buscardados.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node buscardados.js"
+  },
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "backend",
+    "grau-tecnico",
+    "dsi10",
+    "Requisições",
+    "Async",
+    "Try -Catch"
+  ],
+  "author": "Luiz Henrique Ramos de Souza",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.1.3"
+  },
+  "engines": {
+    "node": ">=20.19.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louis0113/BE-Node-Grau.git"
+  }
+}
