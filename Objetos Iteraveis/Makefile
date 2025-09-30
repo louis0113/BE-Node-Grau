@@ -1,19 +1,15 @@
 name=index
-run: ${name}.js
-	@if [ -f ${name}.js ]; then \
-		node ${name}.js; \
-		else \
-		echo "Error: The file ${name}.js does not exist. Run 'make setup' first."; \
-		exit 1; \
-		fi
-setup:
+
+${name}.js: 
 	@if [ -f ${name}.js ]; then \
 		echo "The file ${name}.js already exists."; \
 		else \
 		touch ${name}.js; \
 		fi
-	@pnpm i
-	@echo "Project ${name}.js has been set up"
+run: ${name}.js
+	pnpm start
+setup:
+	pnpm i
 clean:
 	rm -rf node_modules/
 test:
