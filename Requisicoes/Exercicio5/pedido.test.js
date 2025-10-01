@@ -17,59 +17,51 @@ describe('Testes para o sistema de pedidos', () => {
   // --- Testes para a função getUsuario ---
   describe('getUsuario', () => {
     test('deve retornar um objeto de usuário com id e nome após 1s', async () => {
+      console.log('EXECUTANDO: Teste para getUsuario');
       const promessaUsuario = getUsuario();
-      jest.advanceTimersByTime(1000); // Avança o tempo em 1 segundo
-      const usuario = await promessaUsuario;
+      // Avança o tempo e aguarda a conclusão das promessas pendentes
+      await jest.advanceTimersByTimeAsync(1000);
 
-      // Verifica se o usuário retornado tem o formato e os tipos corretos
-      expect(usuario).toEqual({
-        id: expect.any(Number),   // Espera que o id seja um número
-        nome: expect.any(String), // Espera que o nome seja uma string
+      await expect(promessaUsuario).resolves.toEqual({
+        id: 5,
+        nome: 'João',
       });
-
-      // Opcionalmente, pode-se verificar os valores exatos se eles forem estáveis
-      expect(usuario).toEqual({ id: 5, nome: 'João' });
+      console.log('FINALIZADO: Teste para getUsuario');
     });
   });
 
   // --- Testes para a função getPedidos ---
   describe('getPedidos', () => {
     test('deve retornar uma lista de pedidos em formato de array de strings após 1.5s', async () => {
-      // Não precisamos de um usuário real para este teste, apenas um ID simulado
+      console.log('EXECUTANDO: Teste para getPedidos (lista de strings)');
       const idUsuarioSimulado = 5;
       const promessaPedidos = getPedidos(idUsuarioSimulado);
-      jest.advanceTimersByTime(1500); // Avança o tempo em 1.5 segundos
+      // Avança o tempo e aguarda a conclusão das promessas pendentes
+      await jest.advanceTimersByTimeAsync(1500);
+
       const pedidos = await promessaPedidos;
-
-      // Verifica se o resultado é um array
+      
       expect(Array.isArray(pedidos)).toBe(true);
-
-      // Verifica se o array não está vazio
-      expect(pedidos.length).toBeGreaterThan(0);
-
-      // Verifica se todos os itens no array são strings
-      pedidos.forEach(pedido => {
-        expect(typeof pedido).toBe('string');
-      });
-
-      // Verificação exata para garantir que o resultado corresponde ao esperado
       expect(pedidos).toEqual(['Salgadinho', 'Maça', 'Banana', 'Iogurte']);
+      console.log('FINALIZADO: Teste para getPedidos (lista de strings)');
     });
 
     test('deve aceitar qualquer id de usuário, pois a lógica atual não o utiliza', async () => {
-        // Este teste garante que, mesmo com a lógica atual, a função não quebra
-        // com diferentes IDs, já que o ID não é usado na implementação.
-        const promessa1 = getPedidos(1);
-        const promessa2 = getPedidos('abc');
-        jest.runAllTimers(); // Executa todos os timers pendentes
+      console.log('EXECUTANDO: Teste para getPedidos (qualquer ID)');
+      const promessa1 = getPedidos(1);
+      const promessa2 = getPedidos('abc');
+      
+      // Executa todos os timers e aguarda a conclusão das promessas
+      await jest.runAllTimersAsync();
         
-        const resultado1 = await promessa1;
-        const resultado2 = await promessa2;
+      const resultado1 = await promessa1;
+      const resultado2 = await promessa2;
 
-        const resultadoEsperado = ['Salgadinho', 'Maça', 'Banana', 'Iogurte'];
+      const resultadoEsperado = ['Salgadinho', 'Maça', 'Banana', 'Iogurte'];
 
-        expect(resultado1).toEqual(resultadoEsperado);
-        expect(resultado2).toEqual(resultadoEsperado);
+      expect(resultado1).toEqual(resultadoEsperado);
+      expect(resultado2).toEqual(resultadoEsperado);
+      console.log('FINALIZADO: Teste para getPedidos (qualquer ID)');
     });
   });
 });
