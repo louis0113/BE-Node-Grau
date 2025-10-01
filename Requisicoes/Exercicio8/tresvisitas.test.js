@@ -1,72 +1,46 @@
-// Importa as funções que serão testadas
-const { primeiraVisita, segundaVisita, terceiraVisita, verificarResultados } = require('./tresvisitas');
+const axios = require('axios');
+const { consultarTresCEPs } = require('./tresvisitas');
 
-describe('Testes para as funções de visita', () => {
+// Informa ao Jest para simular o módulo 'axios'
+jest.mock('axios');
 
-  beforeEach(() => {
-    jest.useFakeTimers();
-    // Espiona console.log para poder verificar suas chamadas nos testes
-    jest.spyOn(console, 'log').mockImplementation(() => {});
-  });
+describe('Testando a consulta de CEPs', () => {
 
-  afterEach(() => {
-    // Restaura o console.log e os timers para não afetar outros testes
-    jest.restoreAllMocks();
-    jest.useRealTimers();
-  });
+  test('deve retornar os dados de três CEPs diferentes', async () => {
+    // Cria dados de resposta simulados para cada CEP
+    const mockData = {
+      '01001000': { data: { logradouro: 'Praça da Sé' } },
+      '04538133': { data: { logradouro: 'Avenida Brigadeiro Faria Lima' } },
+      '05425070': { data: { logradouro: 'Rua Butantã' } }
+    };
 
-  test('primeiraVisita deve resolver com a mensagem correta', async () => {
-    console.log('EXECUTANDO: Teste para primeiraVisita');
-    const promessa = primeiraVisita();
-    // Avança o tempo e permite que micro-tarefas (como a resolução da promessa) sejam executadas
-    await jest.advanceTimersByTimeAsync(1000);
-    await expect(promessa).resolves.toBe('Primeira visita foi aceita');
-    console.log('FINALIZADO: Teste para primeiraVisita');
-  });
+    // Configura o mock do axios.get para retornar uma resposta diferente
+    // com base no CEP que está sendo consultado na URL.
+    axios.get.mockImplementation(url => {
+      if (url.includes('01001000')) {
+        return Promise.resolve(mockData['01001000']);
+      } 
+      if (url.includes('04538133')) {
+        return Promise.resolve(mockData['04538133']);
+      }
+      if (url.includes('05425070')) {
+        return Promise.resolve(mockData['05425070']);
+      }
+      return Promise.reject(new Error('CEP não encontrado no mock'));
+    });
 
-  test('segundaVisita deve rejeitar com a mensagem correta', async () => {
-    console.log('EXECUTANDO: Teste para segundaVisita');
-    const promessa = segundaVisita();
-    // Avança o tempo e permite que micro-tarefas (como a rejeição da promessa) sejam executadas
-    await jest.advanceTimersByTimeAsync(2000);
-    await expect(promessa).rejects.toBe('Segunda visita foi rejeitada');
-    console.log('FINALIZADO: Teste para segundaVisita');
-  });
+    // Executa a função que queremos testar
+    const resultado = await consultarTresCEPs();
 
-  test('terceiraVisita deve resolver com a mensagem correta', async () => {
-    console.log('EXECUTANDO: Teste para terceiraVisita');
-    const promessa = terceiraVisita();
-    await jest.advanceTimersByTimeAsync(500);
-    await expect(promessa).resolves.toBe('Terceira visita foi aceita');
-    console.log('FINALIZADO: Teste para terceiraVisita');
-  });
-
-  test('verificarResultados deve retornar os resultados de todas as promessas', async () => {
-    console.log('EXECUTANDO: Teste para verificarResultados');
-    
-    const p1 = primeiraVisita();
-    const p2 = segundaVisita();
-    const p3 = terceiraVisita();
-
-    // Inicia a verificação e armazena a promessa de resultado
-    const promessaResultados = verificarResultados(p1, p2, p3);
-
-    // Avança os timers para garantir que todas as promessas dentro de verificarResultados sejam concluídas
-    await jest.runAllTimersAsync();
-
-    // Aguarda a resolução da promessa principal e verifica o valor
-    await expect(promessaResultados).resolves.toEqual([
-      { status: 'fulfilled', value: 'Primeira visita foi aceita' },
-      { status: 'rejected', reason: 'Segunda visita foi rejeitada' },
-      { status: 'fulfilled', value: 'Terceira visita foi aceita' },
+    // Verifica se o resultado está no formato esperado
+    expect(resultado).toEqual([
+      { logradouro: 'Praça da Sé' },
+      { logradouro: 'Avenida Brigadeiro Faria Lima' },
+      { logradouro: 'Rua Butantã' }
     ]);
 
-    // Verifica também o efeito colateral (log no console)
-    expect(console.log).toHaveBeenCalledWith([
-      { status: 'fulfilled', value: 'Primeira visita foi aceita' },
-      { status: 'rejected', reason: 'Segunda visita foi rejeitada' },
-      { status: 'fulfilled', value: 'Terceira visita foi aceita' },
-    ]);
-    console.log('FINALIZADO: Teste para verificarResultados');
+    // Opcional: Verifica se o axios.get foi chamado 3 vezes
+    expect(axios.get).toHaveBeenCalledTimes(3);
   });
+
 });
