@@ -45,7 +45,7 @@ while (x != 0){
       for (let playlist of playlists){
         if ((playlist.name.toUpperCase() === listName.toUpperCase())){
           registeredSongs = parseInt(prompt(`Enter how many songs you want to register in Playlist (${playlist.name}): `));
-          for ( let x = 0; x < registeredSongs; x ++){
+          for ( let x = 1; x <= registeredSongs; x++){
             newSong = prompt(`Enter the name of the ${x}th song: `);
             playlist.list.addSong(newSong);
             totalSongs = parseInt(playlist.list.songs.length);
