@@ -1,29 +1,51 @@
-describe('Contador', () => {
+// Define a variável que receberá a função a ser testada
+let contarAte;
 
-    beforeEach(() => {
-        // Limpa o cache de módulos do Jest antes de cada teste. 
-        // Isso garante que cada teste receba uma instância "nova" do módulo count,
-        // com a variável 'x' reiniciada para 0.
-        jest.resetModules();
-    });
+// Ativa os timers falsos do Jest para controlar o setTimeout
+jest.useFakeTimers();
 
-    test('Deve incrementar o contador para 1', () => {
-        // Dentro do teste, importamos uma versão nova do módulo.
-        const { increment, getCount } = require('./count');
-        increment();
-        expect(getCount()).toBe(1);
-    });
+// Bloco que executa ANTES de CADA teste
+beforeEach(() => {
+  // Limpa o cache de módulos do Jest. Isso garante que o `count.js` 
+  // seja recarregado a cada teste, resetando a variável global `x` para 1.
+  jest.resetModules();
+  
+  // Re-importa a função `contarAte` após resetar o módulo.
+  // Agora temos uma versão "limpa" da função para cada teste.
+  contarAte = require("./count");
+});
 
-    test('Deve começar de 0 novamente em um novo teste e incrementar para 2', () => {
-        // Graças ao jest.resetModules(), este teste também começa com x = 0.
-        const { increment, getCount } = require('./count');
-        increment();
-        increment();
-        expect(getCount()).toBe(2);
-    });
+describe("Testando a função de contagem com estado compartilhado", () => {
 
-    test('O contador deve ser 0 se não for incrementado', () => {
-        const { getCount } = require('./count');
-        expect(getCount()).toBe(0);
-    });
+  test("deve resolver a promessa com o valor 1 na primeira chamada", async () => {
+    const promise = contarAte(); // Chama a função, que retorna uma promessa
+    
+    // Avança os timers para que o setTimeout dentro da promessa execute
+    jest.runAllTimers();
+    
+    // Verifica se a promessa resolve com o valor esperado (1)
+    await expect(promise).resolves.toBe(1);
+  });
+
+  test("deve resolver a promessa com o valor 1 novamente em um teste separado", async () => {
+    // Graças ao beforeEach com jest.resetModules(), 'x' é 1 novamente.
+    const promise = contarAte();
+    
+    jest.runAllTimers();
+    
+    await expect(promise).resolves.toBe(1);
+  });
+
+  test("deve incrementar o valor em chamadas sequenciais dentro do mesmo teste", async () => {
+    // Primeira chamada no mesmo teste
+    const promise1 = contarAte();
+    jest.runAllTimers();
+    await expect(promise1).resolves.toBe(1);
+
+    // Segunda chamada no mesmo teste. Como o módulo não foi resetado AINDA,
+    // 'x' foi incrementado e o próximo valor deve ser 2.
+    const promise2 = contarAte();
+    jest.runAllTimers();
+    await expect(promise2).resolves.toBe(2);
+  });
 });
