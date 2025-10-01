@@ -1,28 +1,27 @@
 function buscarComTimeout(){
   const busca = 
-    new Promise((resolve, reject) => {
-      setTimeout(() =>{
+    new Promise((resolve) => {
+      setTimeout(() => {
         resolve("Buscando dados...");
-      }, 2000)
+      }, 2000);
     });
 
   const tm = 
-    new Promise((resolve, reject) => {
+    new Promise((_, reject) => {
       setTimeout(() => {
-        reject("Tempo esgotado")
-      }, 1000)
-    })
+        reject("Tempo esgotado");
+      }, 1000);
+    });
 
-  Promise.race([tm, busca]). 
-    then((value) => {
-      console.log(`${value}`)
-    })
-    .catch((error) => {
-      console.log(`${error}`)
-    })
-
+  // Retorna a Promise.race para que o chamador possa lidar com o resultado.
+  return Promise.race([tm, busca]);
 }
 
-buscarComTimeout()
+// Este bloco só será executado se o arquivo for rodado diretamente com `node timeout.js`
+if (require.main === module) {
+  buscarComTimeout()
+    .then(value => console.log(value)) // Saída em caso de sucesso
+    .catch(error => console.log(error)); // Saída em caso de erro (o que acontecerá aqui)
+}
 
 module.exports = buscarComTimeout;

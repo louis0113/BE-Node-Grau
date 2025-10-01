@@ -1,75 +1,72 @@
 // Importa as funções que serão testadas
 const { primeiraVisita, segundaVisita, terceiraVisita, verificarResultados } = require('./tresvisitas');
 
-// Agrupa todos os testes relacionados às visitas em um bloco 'describe'
 describe('Testes para as funções de visita', () => {
 
-  // Antes de cada teste, habilita o uso de timers falsos do Jest
-  // Isso nos permite controlar a passagem do tempo (ex: setTimeout) manualmente
   beforeEach(() => {
     jest.useFakeTimers();
+    // Espiona console.log para poder verificar suas chamadas nos testes
+    jest.spyOn(console, 'log').mockImplementation(() => {});
   });
 
-  // Depois de cada teste, restaura os timers reais para não afetar outros testes
   afterEach(() => {
+    // Restaura o console.log e os timers para não afetar outros testes
+    jest.restoreAllMocks();
     jest.useRealTimers();
   });
 
-  // Testa a função primeiraVisita
-  test('primeiraVisita deve resolver com a mensagem correta após 1 segundo', () => {
+  test('primeiraVisita deve resolver com a mensagem correta', async () => {
+    console.log('EXECUTANDO: Teste para primeiraVisita');
     const promessa = primeiraVisita();
-    // Avança o tempo dos timers em 1000ms (1 segundo)
-    jest.advanceTimersByTime(1000);
-    // Esperamos que a promessa seja resolvida com o valor esperado
-    return expect(promessa).resolves.toBe('Primeira visita foi aceita');
+    // Avança o tempo e permite que micro-tarefas (como a resolução da promessa) sejam executadas
+    await jest.advanceTimersByTimeAsync(1000);
+    await expect(promessa).resolves.toBe('Primeira visita foi aceita');
+    console.log('FINALIZADO: Teste para primeiraVisita');
   });
 
-  // Testa a função segundaVisita
-  test('segundaVisita deve rejeitar com a mensagem correta após 2 segundos', () => {
+  test('segundaVisita deve rejeitar com a mensagem correta', async () => {
+    console.log('EXECUTANDO: Teste para segundaVisita');
     const promessa = segundaVisita();
-    // Avança o tempo dos timers em 2000ms (2 segundos)
-    jest.advanceTimersByTime(2000);
-    // Esperamos que a promessa seja rejeitada com o motivo esperado
-    return expect(promessa).rejects.toBe('Segunda visita foi rejeitada');
+    // Avança o tempo e permite que micro-tarefas (como a rejeição da promessa) sejam executadas
+    await jest.advanceTimersByTimeAsync(2000);
+    await expect(promessa).rejects.toBe('Segunda visita foi rejeitada');
+    console.log('FINALIZADO: Teste para segundaVisita');
   });
 
-  // Testa a função terceiraVisita
-  test('terceiraVisita deve resolver com a mensagem correta após 0.5 segundos', () => {
+  test('terceiraVisita deve resolver com a mensagem correta', async () => {
+    console.log('EXECUTANDO: Teste para terceiraVisita');
     const promessa = terceiraVisita();
-    // Avança o tempo dos timers em 500ms (0.5 segundos)
-    jest.advanceTimersByTime(500);
-    // Esperamos que a promessa seja resolvida com o valor esperado
-    return expect(promessa).resolves.toBe('Terceira visita foi aceita');
+    await jest.advanceTimersByTimeAsync(500);
+    await expect(promessa).resolves.toBe('Terceira visita foi aceita');
+    console.log('FINALIZADO: Teste para terceiraVisita');
   });
 
-  // Testa a função verificarResultados, que usa Promise.allSettled
-  test('verificarResultados deve registrar os resultados de todas as promessas', async () => {
-    // A função verificarResultados tem como efeito colateral logar no console.
-    // Para testar isso, "espionamos" o console.log para capturar o que foi enviado para ele.
-    const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-
-    // Iniciamos as três promessas
+  test('verificarResultados deve retornar os resultados de todas as promessas', async () => {
+    console.log('EXECUTANDO: Teste para verificarResultados');
+    
     const p1 = primeiraVisita();
     const p2 = segundaVisita();
     const p3 = terceiraVisita();
 
-    // Chamamos a função que aguarda todas as promessas serem resolvidas ou rejeitadas
-    const promessaVerificacao = verificarResultados(p1, p2, p3);
+    // Inicia a verificação e armazena a promessa de resultado
+    const promessaResultados = verificarResultados(p1, p2, p3);
 
-    // Executa todos os timers pendentes (1s, 2s, 0.5s) de uma só vez
-    jest.runAllTimers();
+    // Avança os timers para garantir que todas as promessas dentro de verificarResultados sejam concluídas
+    await jest.runAllTimersAsync();
 
-    // Aguarda a conclusão da função verificarResultados
-    await promessaVerificacao;
-
-    // Verificamos se o console.log foi chamado com o resultado esperado do Promise.allSettled
-    expect(consoleLogSpy).toHaveBeenCalledWith([
+    // Aguarda a resolução da promessa principal e verifica o valor
+    await expect(promessaResultados).resolves.toEqual([
       { status: 'fulfilled', value: 'Primeira visita foi aceita' },
       { status: 'rejected', reason: 'Segunda visita foi rejeitada' },
       { status: 'fulfilled', value: 'Terceira visita foi aceita' },
     ]);
 
-    // Restaura a função console.log original para não interferir em outros testes
-    consoleLogSpy.mockRestore();
+    // Verifica também o efeito colateral (log no console)
+    expect(console.log).toHaveBeenCalledWith([
+      { status: 'fulfilled', value: 'Primeira visita foi aceita' },
+      { status: 'rejected', reason: 'Segunda visita foi rejeitada' },
+      { status: 'fulfilled', value: 'Terceira visita foi aceita' },
+    ]);
+    console.log('FINALIZADO: Teste para verificarResultados');
   });
 });
