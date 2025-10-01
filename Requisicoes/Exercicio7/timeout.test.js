@@ -1,20 +1,18 @@
-const fazAlgo = require('./timeout');
+const buscarComTimeout = require('./timeout');
 
-describe('Testando a função com timeout', () => {
+describe('Testando a função com Promise.race e timeout', () => {
 
   // Ativa o uso de timers falsos para todo este bloco de testes
   jest.useFakeTimers();
 
-  test('deve resolver a promessa após o timeout simulado', async () => {
-    const promisePendente = fazAlgo();
+  test('deve rejeitar a promessa porque o timeout de 1000ms é mais rápido', async () => {
+    const promisePendente = buscarComTimeout();
 
-    // Neste ponto, a promessa está pendente e o setTimeout está na fila.
-
-    // Avança todos os timers pendentes (o setTimeout de 2000ms será executado imediatamente)
+    // Avança os timers. O timer de 1000ms (rejeição) será executado primeiro.
     jest.runAllTimers();
 
-    // Agora que o timer "avançou", a promessa pode ser resolvida.
-    // Usamos `await` e `resolves` para verificar se a promessa é resolvida com o valor esperado.
-    await expect(promisePendente).resolves.toBe('Tudo certo');
+    // Esperamos que a promessa seja REJEITADA com a mensagem de tempo esgotado.
+    // Usamos `await` e `rejects` para verificar o motivo da rejeição.
+    await expect(promisePendente).rejects.toBe('Tempo esgotado');
   });
 });
