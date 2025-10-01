@@ -1,6 +1,19 @@
-const contar = require("./count");
-let x = 1
-test("Deve contar de 1,2, 3 ... 20", () =>{
+const contarAte = require('./count');
 
-  console.log(contar(5))
-})
+describe('contarAte', () => {
+  // We are resetting the module to ensure that our tests are independent
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  test('should resolve with 1 on the first call', async () => {
+    const contarAte = require('./count');
+    await expect(contarAte()).resolves.toBe(1);
+  });
+
+  test('should resolve with 2 on the second call if called twice', async () => {
+    const contarAte = require('./count');
+    await contarAte(); // First call
+    await expect(contarAte()).resolves.toBe(2); // Second call
+  });
+});

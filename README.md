@@ -13,6 +13,7 @@ O objetivo deste repositório é demonstrar o conhecimento adquirido em programa
 - **Node.js** - Ambiente de execução JavaScript
 - **JavaScript** - Linguagem de programação
 - **pnpm** - Gerenciador de pacotes
+- **Make** - Automação de compilação
 - **Git & GitHub** - Controle de versão
 
 ## 📦 Pré-requisitos
@@ -21,6 +22,7 @@ Antes de começar, você precisa ter instalado:
 
 - [Node.js](https://nodejs.org/) (versão 20 ou superior)
 - [pnpm](https://pnpm.io/) (gerenciador de pacotes)
+- [Make](https://www.gnu.org/software/make/)
 
 ### Instalando o pnpm
 
@@ -28,6 +30,27 @@ Caso não tenha o pnpm instalado:
 
 ```bash
 npm install -g pnpm
+```
+
+### Instalando o Make
+
+**No Debian/Ubuntu (apt)**
+
+```bash
+sudo apt update
+sudo apt install make
+```
+
+**No CentOS/Fedora/RHEL (yum)**
+
+```bash
+sudo yum install make
+```
+
+**No Arch Linux (pacman)**
+
+```bash
+sudo pacman -S make
 ```
 
 ## ⚙️ Instalação e Configuração

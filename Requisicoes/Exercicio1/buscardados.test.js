@@ -1,16 +1,14 @@
-const {buscarDadosDoServidor} = require("./buscardados");
+const { buscarDadosDoServidor } = require("./buscardados");
 
-sucess = {
-  status : 200,
-  dados : "OK"
-}
+// O teste foi reescrito para ser mais robusto e direto.
+// Em vez de comparar a saída de console.log, o que é uma má prática,
+// agora verificamos diretamente as propriedades do objeto retornado pela Promise.
 
-function out(obj){
-  console.log(`Status: ${obj.status}\nDados: ${obj.dados}`);
-}
-
-test("O Status deve ser 200 e o info deve ser OK ", () => {
-  return buscarDadosDoServidor().then( data => {
-    expect(out(data)).toBe(out(sucess));
-  })
+test("deve retornar um objeto com status 200 e dados 'OK'", () => {
+  // A asserção 'resolves' do Jest aguarda a Promise ser resolvida
+  // e então permite verificar o valor resultante.
+  return expect(buscarDadosDoServidor()).resolves.toEqual({
+    status: 200,
+    dados: "OK"
+  });
 });

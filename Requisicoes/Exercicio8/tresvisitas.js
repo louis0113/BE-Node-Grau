@@ -31,3 +31,5 @@ function verificarResultados(pv,sv,tv){
 }
 
 verificarResultados(primeiraVisita(), segundaVisita(), terceiraVisita());
+
+module.exports = {primeiraVisita, segundaVisita, terceiraVisita}
