@@ -7,4 +7,4 @@ ${name}.js:
 		touch ${name}.js; \
 		fi
 run: ${name}.js
-	node ${name}.js
+	pnpm start
