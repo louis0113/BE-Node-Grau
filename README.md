@@ -99,6 +99,8 @@ O projeto possui um `Makefile` com comandos auxiliares:
 ## 📚 Atividades Implementadas
 
 - Objetos Iteráveis
+- Async-Await e Promisses
+- Criação de API em Nodejs e Métodos HTTP
 
 ## 👩‍🏫 Créditos
 
