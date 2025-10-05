@@ -87,7 +87,9 @@ pnpm start
 
 ### Comandos Make
 
-O projeto possui um `Makefile` com comandos auxiliares:
+O projeto possui um `Makefile` em cada diretório com comandos auxiliares:
+
+#### Comandos dos `Makefile` dentro dos diretorios
 
 | Comando | Descrição |
 |---------|-----------|
@@ -95,6 +97,14 @@ O projeto possui um `Makefile` com comandos auxiliares:
 | `make setup` | Configura as dependências do projeto |
 | `make clean` | Remove o diretório node_modules |
 | `make test` | Executa os casos de teste |
+
+#### Comandos no `Makefile` principal na raiz do Projeto
+
+| Comando | Descrição |
+|---------|-----------|
+| `make setup` | Faz o setup de todos os diretórios |
+| `make clean` | Remove o **node_modules/** de todos os diretórios |
+| `make all` | Faz `make clean` e depois `make setup` |
 
 ## 📚 Atividades Implementadas
 
