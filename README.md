@@ -112,6 +112,7 @@ O projeto possui um `Makefile` em cada diretório com comandos auxiliares:
 - Async-Await e Promisses
 - Criação de API em Nodejs e Métodos HTTP
 - Análise de Frameworks em Node.js em casos específicos
+- Exércicio em Node.js com o framework Express.js
 
 ## 👩‍🏫 Créditos
 
