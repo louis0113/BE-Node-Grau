@@ -1,0 +1,16 @@
+{
+	"name": "Exercicio-feito-em-node-js",
+	"version": "1.0.0",
+	"description": "Servidor em Node feito com o framework express",
+	"main": "app.js",
+	"scripts": {
+		"test": "",
+		"start": "node app.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^5.1.0"
+	}
+}
