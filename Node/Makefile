@@ -8,3 +8,9 @@ ${name}.js:
 		fi
 run: ${name}.js
 	pnpm start
+setup:
+	pnpm i
+log: 
+	touch servidor.log
+clean: 
+	rm -rf node_modules/ servidor.log
