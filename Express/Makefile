@@ -11,6 +11,8 @@ run: ${name}.js
 setup:
 	pnpm i
 clean:
-	rm -rf node_modules/
+	rm -rf node_modules/ ${name}.log
 test:
 	pnpm test
+log:
+	touch ${name}.log
