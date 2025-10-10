@@ -8,7 +8,8 @@ SUBDIRS := Objetos\ Iteraveis \
            Requisicoes/Exercicio6 \
            Requisicoes/Exercicio7 \
            Requisicoes/Exercicio8 \
-					 Express
+					 Express \
+					 Node
 
 setup:
 	@for d in $(SUBDIRS); do \
