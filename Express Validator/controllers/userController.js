@@ -4,11 +4,6 @@ let users = [];
 let x = 0;
 let getUserWithId = (req, res) => {
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()){
-    return res.status(400).json({errors: errors.array()})
-  }
-
   const id = req.params.id;
 
   for (const user of users){
