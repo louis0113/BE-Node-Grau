@@ -9,7 +9,8 @@ SUBDIRS := Objetos\ Iteraveis \
            Requisicoes/Exercicio7 \
            Requisicoes/Exercicio8 \
 					 Express \
-					 Node
+					 Node \
+					 Express\ Validator 
 
 setup:
 	@for d in $(SUBDIRS); do \
