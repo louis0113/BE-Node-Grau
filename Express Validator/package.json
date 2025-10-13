@@ -1,0 +1,26 @@
+{
+  "name": "Express Validator",
+  "version": "1.0.0",
+  "description": " Uma aplicação que aplica os conceitos de validação, estrutura de uma APi em Node.js com o framework Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node app.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "javascript",
+    "validação",
+    "testes"
+  ],
+  "author": "Luiz Henrique Ramos de Souza",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1",
+  "dependencies": {
+    "express" : "^5.1.0",
+    "express-validator" : "^7.2.1",
+    "winston": "^3.18.3"
+  }
+
+}
