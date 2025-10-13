@@ -113,6 +113,7 @@ O projeto possui um `Makefile` em cada diretório com comandos auxiliares:
 - Criação de API em Nodejs e Métodos HTTP
 - Análise de Frameworks em Node.js em casos específicos
 - Exércicio em Node.js com o framework Express.js
+- Validação de dados usando express-validator com o framework Express.js no Node.js
 
 ## 👩‍🏫 Créditos
 
