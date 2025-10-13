@@ -5,9 +5,6 @@
 /node_modules
 flake.nix
 
-# pnpm
-pnpm-lock.yaml
-
 # logs
 logs
 *.log
