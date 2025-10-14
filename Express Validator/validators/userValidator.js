@@ -1,12 +1,9 @@
 const {body} = require("express-validator");
 
-const getUserWithIdValidation = [
-  body("id").isInt().isNumeric().not().isAlpha().withMessage("O param do ID deve ser um número inteiro")
-]
 const setUserValidation = [
-  body("id").exists().isNumeric().isInt({min : 1}).not().isString().withMessage("Porfavor, coloque um inteiro maior que 1"),
-  body("name").exists().isLength({min : 3}).withMessage("Coloque o nome com no mínimo 3 caracteres"),
-  body("email").exists().isEmail().withMessage("Coloque um e-mail válido :)")
+  body("id").exists().isNumeric().isInt({min : 1}).not().isString().withMessage("Please, enter an integer greater than 1"),
+  body("name").exists().isLength({min : 3}).withMessage("Enter a name with at least 3 characters"),
+  body("email").exists().isEmail().withMessage("Enter a valid email :)")
 ]
 
-module.exports = {getUserWithIdValidation,setUserValidation};
+module.exports = {setUserValidation};
