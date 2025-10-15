@@ -8,9 +8,18 @@ const Pet = sequelize.define(
     autoIncrement : true,
     primaryKey : true
   },
-  namePet : DataTypes.STRING,
-  typePet : DataTypes.STRING,
-  age : DataTypes.INTEGER,
+    namePet : {
+      type: DataTypes.STRING,
+      allowNull : false
+    },
+    typePet : {
+      type: DataTypes.STRING,
+      allowNull : false
+    },
+    age : {
+      type : DataTypes.INTEGER,
+      allowNull : false
+    },
   adopted : {
     type: DataTypes.BOOLEAN,
     defaultValue : false,
