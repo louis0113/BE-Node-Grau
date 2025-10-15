@@ -114,6 +114,7 @@ O projeto possui um `Makefile` em cada diretório com comandos auxiliares:
 - Análise de Frameworks em Node.js em casos específicos
 - Exércicio em Node.js com o framework Express.js
 - Validação de dados usando express-validator com o framework Express.js no Node.js
+- Adicionando exércicio de banco de dados usando a ORM chamada Sequelize e usando as tecnologias usadas anteriormente também
 
 ## 👩‍🏫 Créditos
 
