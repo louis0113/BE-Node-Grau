@@ -10,7 +10,8 @@ SUBDIRS := Objetos\ Iteraveis \
            Requisicoes/Exercicio8 \
 					 Express \
 					 Node \
-					 Express\ Validator 
+					 Express\ Validator \
+					 Banco
 
 setup:
 	@for d in $(SUBDIRS); do \
