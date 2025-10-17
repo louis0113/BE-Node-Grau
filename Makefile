@@ -11,7 +11,8 @@ SUBDIRS := Objetos\ Iteraveis \
 					 Express \
 					 Node \
 					 Express\ Validator \
-					 Banco
+					 Banco \
+					 Erros
 
 setup:
 	@for d in $(SUBDIRS); do \
