@@ -1,0 +1,23 @@
+{
+  "name": "Erros",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "node",
+    "pnpm",
+    "middlewares",
+    "errors",
+    "express"
+  ],
+  "author": "Luiz Henrique Ramos de Souza",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1",
+  "dependencies": {
+   "express" : "^5.1.0" 
+  }
+}
