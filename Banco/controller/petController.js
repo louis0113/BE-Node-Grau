@@ -1,59 +1,113 @@
 const petModel = require("../model/Pet");
-const {validationResult} = require("express-validator")
+const { validationResult } = require("express-validator");
 
-async function getPets(req, res){
-  try{
-    const petsListados = await petModel.findAll();
-    res.status(200).json({"message" : "Listando todos os pets!", "listaPets" : petsListados});
-  }catch(err){
-    res.status(404).json({"message" : "Não foi encontrado os pets!", "erro" : err});
+let status, url;
+
+const urls = [
+  "http.dog",
+  "http.cat",
+  "httpducks.com",
+  "http.fish",
+  "httpcats.com",
+  "httpgoats.com",
+  "http.garden",
+  "http.pizza",
+];
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function animalRedirect(animal, status) {
+  switch (animal) {
+    case "dog":
+      return `https://${urls[0]}/${status}.jpg`;
+      break;
+    case "cat":
+      return `https://${urls[1]}/${status}.jpg`;
+      break;
+    case "duck":
+      return `https://${urls[2]}/${status}.jpg`;
+      break;
+    case "goat":
+      return `https://${urls[5]}/${status}.jpg`;
+      break;
+    case "fish":
+      return `https://${urls[3]}/${status}.jpg`;
+      break;
+    default:
+      return `https://${urls[7]}/${status}.jpg`;
+      break;
   }
 }
 
-async function setPets(req, res){
+async function getPets(req, res) {
+  const length = urls.length - 1;
+  const num = getRandomInt(0, length);
+  url = urls[num];
+  try {
+    const petsListados = await petModel.findAll();
+    status = 200;
+    res.status(status).redirect(`https://${url}/${status}.jpg`);
+  } catch (err) {
+    status = 404;
+    res.status(status).redirect(`https://${url}/${status}.jpg`);
+  }
+}
 
+async function setPets(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({errors: errors.array()});
+    return res.status(400).json({ errors: errors.array() });
   }
 
-  const {name, type, age, adopted} = req.body;
-
+  const { name, type, age, adopted } = req.body;
   try {
+    const petRepetido = await petModel.findOne({ where: { namePet: name } });
 
-    const petRepetido = await petModel.findOne({where: {namePet : name}})
-
-    if (petRepetido){
-      return res.status(400).json({"message" : `O nome ${name} já foi inserido no banco de dados`})
+    if (petRepetido) {
+      status = 400;
+      url = animalRedirect(type, status);
+      return res.status(status).redirect(url);
     }
 
     const petInserido = await petModel.create({
-      namePet : name,
-      typePet : type,
-      age : age,
-      adopted:  adopted
-    }); 
-
-    res.status(201).json({"message" : "Os dados do pet foram adicionados com sucesso", "dadosPet" : petInserido})
-
-  } catch (err){
-    res.status(400).json({"message" : "Não foi possível adicionar os dados do Pet do banco de dados", "erro" : err})
+      namePet: name,
+      typePet: type,
+      age: age,
+      adopted: adopted,
+    });
+    statls = 201;
+    url = animalRedirect(type, status);
+    res.status(status).redirect(url);
+  } catch (err) {
+    status = 400;
+    url = animalRedirect(type, status);
+    res.status(status).redirect(url);
   }
 }
 
-async function deletePetsById(req, res){
+async function deletePetsById(req, res) {
   const petId = req.params.id;
 
-  try{
+  const animal = await petModel.findByPk(petId);
+  const type = animal.typePet;
+  try {
     const dadosDeletado = await petModel.destroy({
       where: {
-        id : petId,
+        id: petId,
       },
-    })
-    res.status(200).json({message : `O pet de id ${petId} foi deletado do banco de dados!`, "status" : dadosDeletado});
-  }catch(err){
-    res.status(400).json({message : "O pet não foi achado para deletar do banco de dados!", "erro" : err})
+    });
+    status = 200;
+    url = animalRedirect(type, status);
+    res.status(status).redirect(url);
+  } catch (err) {
+    status = 400;
+    url = animalRedirect(type, status);
+    res.status(status).redirect(url);
   }
 }
 
-module.exports = {getPets, setPets, deletePetsById};
+module.exports = { getPets, setPets, deletePetsById };
