@@ -1,6 +1,6 @@
 const express = require("express");
 const routerPet = require("./routes/petRoutes");
-const sequelize = require("./model/database");
+const sequelize = require("./config/database");
 const app = express();
 const PORT = 3000;
 app.use(express.urlencoded({ extended: true }));
