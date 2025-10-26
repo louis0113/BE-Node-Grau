@@ -13,4 +13,4 @@ const setProductValidation = [
     .withMessage("Hit a valid price, otherwise more than 0.10"),
 ];
 
-module.exports = setProductValidation;
+module.exports = { setProductValidation };
