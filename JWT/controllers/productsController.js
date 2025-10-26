@@ -15,10 +15,6 @@ const setProducts = async (req, res, next) => {
     const { name, price } = req.body;
     const product = await Products.create({ name: name, price: price });
 
-    if (!product) {
-      return res.status(400).json({ message: "Algum dado inválido" });
-    }
-
     res.status(201).json({ product: product });
   } catch (err) {
     next(err);

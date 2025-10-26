@@ -1,6 +1,10 @@
 const { body } = require("express-validator");
 
 const setRegisterValidation = [
+  body("username")
+    .exists()
+    .isLength({ min: 3 })
+    .withMessage("Enter a username with at least 3 characters"),
   body("password")
     .exists()
     .isLength({ min: 8 })
