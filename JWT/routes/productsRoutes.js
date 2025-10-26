@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const productsControllers = require("../controllers/productsController");
 const productsValidators = require("../validators/productsValidator");
+const validateRequest = require("../middlewares/validateMiddleware");
 const {
   authenticateToken,
   authorizedRoles,
@@ -11,7 +12,8 @@ router.get("/profile", authenticateToken, productsControllers.getProducts);
 
 router.post(
   "/admin",
-  productsValidators,
+  productsValidators.setProductValidation,
+  validateRequest,
   authenticateToken,
   authorizedRoles("admin"),
   productsControllers.setProducts,
