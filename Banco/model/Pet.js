@@ -1,4 +1,4 @@
-const sequelize = require("./database");
+const sequelize = require("../config/database");
 const {DataTypes, Models} = require("sequelize")
 const Pet = sequelize.define(
 'Pet', 
