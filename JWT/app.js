@@ -17,10 +17,6 @@ const startServer = async () => {
 
     await sequelize.sync();
     console.log("✅ Tabelas sincronizadas");
-
-    app.listen(3000, () => {
-      console.log("🚀 Servidor em http://localhost:3000/api");
-    });
   } catch (err) {
     console.error("❌ Erro:", err);
     process.exit(1);
