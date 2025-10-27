@@ -12,7 +12,3 @@ setup:
 	pnpm i
 clean:
 	rm -rf node_modules/ ${name}.log
-test:
-	pnpm test
-log:
-	touch ${name}.log
