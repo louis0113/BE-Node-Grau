@@ -12,7 +12,9 @@ SUBDIRS := Objetos\ Iteraveis \
 					 Node \
 					 Express\ Validator \
 					 Banco \
-					 Erros
+					 Erros \
+					 JWT \
+					 Salas
 
 setup:
 	@for d in $(SUBDIRS); do \
