@@ -298,7 +298,7 @@ make run
 - **Node.js**: HTTP, File System, Eventos
 - **Express.js**: Middlewares, Rotas, Request/Response
 - **Banco de Dados**: ORM, Migrations, Models, Relações
-- **Segurança**: JWT, Bcrypt, Validação de Dados, RBAC
+- **Segurança**: JWT, Bcrypt, Validação de Dados, RBAC, Express-Session
 - **Arquitetura**: REST API, MVC, Middlewares, Error Handling
 - **DevOps**: Logging, Variáveis de Ambiente, Scripts de Automação
 
