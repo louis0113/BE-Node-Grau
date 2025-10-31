@@ -14,7 +14,8 @@ SUBDIRS := Objetos\ Iteraveis \
 					 Banco \
 					 Erros \
 					 JWT \
-					 Salas
+					 Salas \
+					 Session
 
 setup:
 	@for d in $(SUBDIRS); do \
