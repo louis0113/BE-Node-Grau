@@ -4,11 +4,6 @@ const getBooking = async (req, res, next) => {
   const role = req.user.role;
   try {
     const findBookings = await Booking.findAll();
-    const admin = role === "admin";
-
-    if (!admin) {
-      res.status(403).json({ message: "Access denied" });
-    }
 
     res.status(200).json(findBookings);
   } catch (err) {
@@ -25,12 +20,6 @@ const deleteBooking = async (req, res, next) => {
 
     if (!booking) {
       return res.status(404).json({ message: "Booking doesn't exist" });
-    }
-
-    const isAdmin = req.user.role === "admin";
-
-    if (!isAdmin) {
-      return res.status(403).json({ message: "Access denied" });
     }
 
     const deleteBooking = await Booking.destroy({
