@@ -11,10 +11,6 @@ const bookingModel = sequelize.define("Bookings", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
   date: {
     type: DataTypes.DATEONLY,
     defaultValue: DataTypes.NOW,
