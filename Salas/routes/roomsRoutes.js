@@ -10,6 +10,13 @@ const {
 router.get("/", authenticateToken, roomController.getRooms);
 
 router.post(
+  "/:id/bookings",
+  authenticateToken,
+  authorizedRoles("member"),
+  roomController.setBookingByRooom,
+);
+
+router.post(
   "/",
   authenticateToken,
   authorizedRoles("admin"),

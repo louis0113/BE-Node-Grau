@@ -1,4 +1,5 @@
 const Rooms = require("../models/roomModel");
+const Booking = require("../models/bookingModel");
 const sequelize = require("../config/database");
 const { Op } = require("sequelize");
 
@@ -93,4 +94,32 @@ const setRoom = async (req, res, next) => {
   }
 };
 
-module.exports = { getRooms, setRoom };
+const setBookingByRooom = async (req, res, next) => {
+  const roomId = req.params.id;
+  try {
+    const { date, start, end } = req.body;
+
+    const bookingFind = await Booking.findOne({
+      where: {
+        roomId: parseInt(roomId),
+      },
+    });
+
+    if (bookingFind) {
+      return res.status(409).json({ message: "Conflict" });
+    }
+
+    const booking = await Booking.create({
+      roomId: parseInt(roomId),
+      date: date,
+      start: start,
+      end: end,
+    });
+
+    res.status(200).json({ message: "Booking created successfully", booking });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { getRooms, setRoom, setBookingByRooom };

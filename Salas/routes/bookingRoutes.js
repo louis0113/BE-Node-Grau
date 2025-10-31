@@ -7,24 +7,17 @@ const {
   authorizedRoles,
 } = require("../middlewares/authMiddleware");
 
-router.post(
-  "/rooms/:id/bookings",
-  authenticateToken,
-  authorizedRoles("member"),
-  bookingController.setBooking,
-);
-
 router.get(
-  "/members/:username/bookings",
+  "/",
   authenticateToken,
-  authorizedRoles("admin", "member"),
+  authorizedRoles("admin"),
   bookingController.getBooking,
 );
 
 router.delete(
-  "/bookings/:id",
+  "/:id",
   authenticateToken,
-  authorizedRoles("admin", "member"),
+  authorizedRoles("admin"),
   bookingController.deleteBooking,
 );
 
