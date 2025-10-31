@@ -1,18 +1,16 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-require("./models/associations");
 const authentication = require("./routes/authRoutes");
 const rooms = require("./routes/roomsRoutes");
 const bookings = require("./routes/bookingRoutes");
 const sequelize = require("./config/database");
 const errorHandler = require("./middlewares/errorHandler");
 app.use(express.json());
-app.use("/api/auth", authentication);
-app.use("/api/rooms", rooms);
-app.use("/api", bookings);
+app.use("/auth", authentication);
+app.use("/rooms", rooms);
+app.use("/bookings", bookings);
 app.use(errorHandler);
-app.use(express.json());
 
 const startServer = async () => {
   try {
