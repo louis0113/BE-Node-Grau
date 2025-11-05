@@ -9,6 +9,10 @@ const notasModel = database.sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     primeiraNota: {
       type: DataTypes.FLOAT,
       allowNull: false,

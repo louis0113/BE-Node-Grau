@@ -9,10 +9,8 @@ const sequelize = new Sequelize(URI);
 const startServer = async () => {
   try {
     await sequelize.authenticate();
-    console.log("✅ Conectado ao MySQL");
 
     await sequelize.sync();
-    console.log("✅ Tabelas sincronizadas");
   } catch (err) {
     console.error("❌ Erro:", err);
     process.exit(1);
