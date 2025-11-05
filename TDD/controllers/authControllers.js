@@ -3,6 +3,14 @@ const User = require("../models/userModel");
 const register = async (req, res) => {
   const { username, email, password } = req.body;
 
+  const findEmail = await User.findOne({ where: { email: email } });
+
+  if (findEmail) {
+    return res
+      .status(400)
+      .json({ message: "Emails exists, try register again" });
+  }
+
   const user = await User.create({
     username: username,
     email: email,
@@ -15,20 +23,19 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const verifyEmail = await User.findOne({ where: { email: email } });
+  const user = await User.findOne({ where: { email: email } });
 
-  if (!verifyEmail) {
+  if (!user) {
     return res.status(400).json({ message: "Email not found " });
   }
 
-  const validPassword = await User.validatePassword(password);
+  const validPassword = await user.validatePassword(password);
 
   if (!validPassword) {
     return res.status(400).json({ message: "Wrong password" });
   }
 
-  req.session.userId = User.userId;
-  req.session.username = User.username;
+  req.session.username = user.username;
   req.session.email = email;
   req.session.isAuthenticated = true;
 

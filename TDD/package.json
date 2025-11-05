@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest"
+    "test": "jest "
   },
   "keywords": [],
-  "author": "",
+  "author": "Luiz Henrique Ramos de Souza",
   "license": "ISC",
   "packageManager": "pnpm@10.18.3",
   "dependencies": {
@@ -18,7 +18,9 @@
     "dotenv": "^17.2.3",
     "express-session": "^1.18.2",
     "bcryptjs": "^3.0.2",
-    "jest": "30.2.0",
     "supertest": "7.1.4"
+  },
+  "devDependencies": {
+    "jest": "30.2.0"
   }
 }
