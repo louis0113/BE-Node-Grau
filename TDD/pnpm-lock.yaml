@@ -26,13 +26,13 @@ importers:
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(mysql2@3.15.3)
-      supertest:
-        specifier: 7.1.4
-        version: 7.1.4
     devDependencies:
       jest:
-        specifier: 30.2.0
+        specifier: ^30.2.0
         version: 30.2.0(@types/node@24.10.0)
+      supertest:
+        specifier: ^7.1.4
+        version: 7.1.4
 
 packages:
 
