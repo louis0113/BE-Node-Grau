@@ -1,7 +1,16 @@
-const { users, notas } = require("../config/database");
-
 const register = (req, res) => {
   const { username, email, password } = req.body;
+
+  const emails = [
+    "carlosmanuel@gmail.com",
+    "anacarla@gmail.com",
+    "anaximenes@gmail.com",
+  ];
+
+  const findEmail = () => {
+    const result = emails.find((e) => e.includes(email)) ? true : false;
+    return result === email;
+  };
 
   if (findEmail) {
     return res
@@ -15,7 +24,25 @@ const register = (req, res) => {
 const login = (req, res) => {
   const { email, password } = req.body;
 
-  if (!user) {
+  const emails = [
+    "carlinhos@gmail.com",
+    "manueljose@gmail.com",
+    "anaximenes@gmail.com",
+  ];
+
+  const passwords = ["12345678", "1", "2"];
+
+  const findEmail = () => {
+    const result = emails.find((e) => e.includes(email));
+    return result === password;
+  };
+
+  const validPassword = () => {
+    const result = passwords.find((pass) => pass.includes(password));
+    return result === password;
+  };
+
+  if (!findEmail) {
     return res.status(400).json({ message: "Email not found " });
   }
 
@@ -23,11 +50,7 @@ const login = (req, res) => {
     return res.status(400).json({ message: "Wrong password" });
   }
 
-  req.session.username = user.username;
-  req.session.email = email;
-  req.session.isAuthenticated = true;
-
   res.status(200).json({ message: "Login feito com sucesso!" });
 };
 
-module.exports = { register, login, logout };
+module.exports = { register, login };
