@@ -1,22 +1,17 @@
+const { users } = require("../config/database");
+
 const register = (req, res) => {
   const { username, email, password } = req.body;
 
-  const emails = [
-    "carlosmanuel@gmail.com",
-    "anacarla@gmail.com",
-    "anaximenes@gmail.com",
-  ];
+  const emailExists = users.some((user) => user.email === email);
 
-  const findEmail = () => {
-    const result = emails.find((e) => e.includes(email)) ? true : false;
-    return result === email;
-  };
-
-  if (findEmail) {
+  if (emailExists) {
     return res
       .status(400)
       .json({ message: "Emails exists, try register again" });
   }
+
+  users.push({ username, email, password });
 
   res.status(201).json({ message: "Usuario criado com sucesso" });
 };
@@ -24,29 +19,13 @@ const register = (req, res) => {
 const login = (req, res) => {
   const { email, password } = req.body;
 
-  const emails = [
-    "carlinhos@gmail.com",
-    "manueljose@gmail.com",
-    "anaximenes@gmail.com",
-  ];
+  const user = users.find((u) => u.email === email);
 
-  const passwords = ["12345678", "1", "2"];
-
-  const findEmail = () => {
-    const result = emails.find((e) => e.includes(email));
-    return result === password;
-  };
-
-  const validPassword = () => {
-    const result = passwords.find((pass) => pass.includes(password));
-    return result === password;
-  };
-
-  if (!findEmail) {
-    return res.status(400).json({ message: "Email not found " });
+  if (!user) {
+    return res.status(400).json({ message: "Email not found" });
   }
 
-  if (!validPassword) {
+  if (user.password !== password) {
     return res.status(400).json({ message: "Wrong password" });
   }
 
