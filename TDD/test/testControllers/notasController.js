@@ -1,6 +1,8 @@
 const setNotas = (req, res) => {
   const { userId, primeiraNota, segundaNota } = req.body;
 
+  let ids = [1, 2, 3];
+
   const verifyNota = (nota) => {
     return nota > 10.0 || nota < 0.0;
   };
