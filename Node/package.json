@@ -4,7 +4,8 @@
   "description": "Compilado das atividades de programação Back-End em Javascript usando NodeJS para o curso de Análise e Desenvolvimento de Sistemas - DSI10",
   "main": "servidor.js",
   "scripts": {
-    "start": "node servidor.js"
+    "start": "node servidor.js",
+    "test": "bun test"
   },
   "keywords": [
     "javascript",
