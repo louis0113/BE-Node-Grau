@@ -1,2 +1,2 @@
 run:
-	node app.js
+	bun app.js

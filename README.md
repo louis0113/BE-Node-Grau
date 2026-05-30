@@ -35,10 +35,10 @@ Antes de começar, você precisa ter instalado:
 
 ### Instalando o pnpm
 
-Caso não tenha o pnpm instalado:
+Caso não tenha o bun instalado:
 
 ```bash
-npm install -g pnpm
+bun install -g pnpm
 ```
 
 ### Instalando o Make
@@ -109,11 +109,11 @@ make run
 
 | Comando                | Descrição                                   |
 | ---------------------- | ------------------------------------------- |
-| `pnpm install`         | Instala todas as dependências do projeto    |
-| `pnpm start`           | Executa o projeto                           |
-| `pnpm test`            | Executa os testes (quando disponível)       |
-| `pnpm add <pacote>`    | Adiciona uma nova dependência               |
-| `pnpm add -D <pacote>` | Adiciona uma dependência de desenvolvimento |
+| `bun install`         | Instala todas as dependências do projeto    |
+| `bun start`           | Executa o projeto                           |
+| `bun test`            | Executa os testes (quando disponível)       |
+| `bun add <pacote>`    | Adiciona uma nova dependência               |
+| `bun add -D <pacote>` | Adiciona uma dependência de desenvolvimento |
 
 ### Comandos Make
 
@@ -124,7 +124,7 @@ O projeto possui um `Makefile` em cada diretório com comandos auxiliares:
 | Comando      | Descrição                                                 |
 | ------------ | --------------------------------------------------------- |
 | `make`       | Cria os arquivos principais do projeto (se não existirem) |
-| `make run`   | Executa o projeto com pnpm start                          |
+| `make run`   | Executa o projeto com bun start                          |
 | `make setup` | Instala as dependências do projeto                        |
 | `make clean` | Remove o diretório node_modules                           |
 | `make test`  | Executa os casos de teste (quando disponível)             |
@@ -252,7 +252,7 @@ Para rodar os testes (quando disponíveis):
 cd "Objetos Iteraveis"
 make test
 # ou
-pnpm test
+bun test
 ```
 
 ## 📝 Exemplos de Uso

@@ -222,11 +222,11 @@ export async function getStaticPaths() {
 ```bash
 # Criar projeto
 mkdir delivery-app && cd delivery-app
-npm init -y
+bun init -y
 
 # Instalar dependências
-npm install express passport jsonwebtoken bcrypt
-npm install --save-dev nodemon
+bun install express passport jsonwebtoken bcrypt
+bun install --save-dev nodemon
 
 # Criar estrutura básica
 mkdir -p src/{controllers,models,routes,middleware}
@@ -236,28 +236,28 @@ mkdir -p src/{controllers,models,routes,middleware}
 ```bash
 # Criar projeto
 mkdir streaming-platform && cd streaming-platform
-npm init -y
+bun init -y
 
 # Instalar dependências
-npm install fastify @fastify/jwt @fastify/cors fastify-plugin
-npm install --save-dev @types/node
+bun install fastify @fastify/jwt @fastify/cors fastify-plugin
+bun install --save-dev @types/node
 
 # Usar CLI do Fastify (opcional)
-npm install -g fastify-cli
+bun install -g fastify-cli
 fastify generate myapp
 ```
 
 ### Caso 3 - Next.js
 ```bash
 # Criar projeto Next.js
-npx create-next-app@latest news-portal
+bunx create-next-app@latest news-portal
 cd news-portal
 
 # Ou com TypeScript
-npx create-next-app@latest news-portal --typescript
+bunx create-next-app@latest news-portal --typescript
 
 # Instalar dependências adicionais
-npm install gray-matter remark remark-html date-fns
+bun install gray-matter remark remark-html date-fns
 ```
 
 ---

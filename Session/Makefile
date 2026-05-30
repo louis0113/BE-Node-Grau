@@ -6,8 +6,8 @@ ${name}.js:
 		touch ${name}.js; \
 		fi
 run: ${name}.js
-	pnpm start
+	bun start
 setup:
-	pnpm i
+	bun i
 clean:
 	rm -rf node_modules/ ${name}.log

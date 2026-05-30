@@ -1,30 +1,36 @@
-let prompt = require("prompt-sync")();
-let x = 1;
-function contarAte(num){
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(x++); 
-    }, 1000)
-  })
+const prompt = require("prompt-sync")();
 
+let x = 1;
+
+function contarAte() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(x++);
+    }, 1000);
+  });
 }
 
-async function contar(n){
-  try{
-    for (let y = 1; y <= num; y++){
-      const contagem = await contarAte(n);
+async function contar(num) {
+  try {
+    for (let y = 1; y <= num; y++) {
+      const contagem = await contarAte();
       console.log(contagem);
     }
-  }catch (err){
+  } catch (err) {
     console.error(err);
   }
 }
 
-function digitarNumero(){
-  num = parseInt(prompt("Digite o número: "));
+function digitarNumero() {
+  const num = parseInt(prompt("Digite o número: "));
   contar(num);
 }
 
-digitarNumero();
+if (require.main === module) {
+  digitarNumero();
+}
 
-module.exports = contarAte;
+module.exports = {
+  contarAte,
+  contar,
+};
